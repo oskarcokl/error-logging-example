@@ -1,0 +1,15 @@
+{
+  "name": "error-logging-example",
+  "version": "1.0.0",
+  "description": "An example project showcasing how to do e2e logging and error logging.",
+  "license": "ISC",
+  "author": "Oskar Čokl",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
