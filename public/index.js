@@ -1,7 +1,5 @@
 // NOTE: Just for dev purposes don't do this in production
-const ELASTIC_API_KEY="a0NxVndad0JwVkoxdHhGbFdDQXI6TG1LZW9heVNNODF3cE0wdjFyRkotQQ==";
 const ELASTIC_ENDPOINT="http://localhost:9200/app-logs/_doc"
-
 const BACKEND_ENDPOINT = "http://localhost:3000/action"
 
 const actionButton = document.getElementById("action-button");
@@ -24,7 +22,6 @@ actionButton.addEventListener("click", () => {
             correlationId: correlationId
         }),
         headers: {
-            "Authorization": `ApiKey ${ELASTIC_API_KEY}`,
             "Content-Type": "application/json"
         }
     })
@@ -58,7 +55,6 @@ errorFrontendButton.addEventListener("click", () => {
             }
         }),
         headers: {
-            "Authorization": `ApiKey ${ELASTIC_API_KEY}`,
             "Content-Type": "application/json"
         }
     })
@@ -78,7 +74,6 @@ errorBackendButton.addEventListener("click", async () => {
             correlationId: correlationId
         }),
         headers: {
-            "Authorization": `ApiKey ${ELASTIC_API_KEY}`,
             "Content-Type": "application/json"
         }
     })

@@ -1,6 +1,5 @@
 import express from "express";
 
-const ELASTIC_API_KEY="a0NxVndad0JwVkoxdHhGbFdDQXI6TG1LZW9heVNNODF3cE0wdjFyRkotQQ==";
 const ELASTIC_ENDPOINT="http://localhost:9200/app-logs/_doc"
 
 const app = express()
@@ -27,7 +26,6 @@ app.post('/action', (req, res) => {
                 correlationId: body.correlationId
             }),
             headers: {
-                "Authorization": `ApiKey ${ELASTIC_API_KEY}`,
                 "Content-Type": "application/json"
             }
         })
@@ -49,7 +47,6 @@ app.post('/action', (req, res) => {
                 }
             }),
             headers: {
-                "Authorization": `ApiKey ${ELASTIC_API_KEY}`,
                 "Content-Type": "application/json"
             }
         })
