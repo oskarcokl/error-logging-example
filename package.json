@@ -11,7 +11,8 @@
     "dev:watch": "nodemon app.js",
     "kibana:start": "docker compose up -d",
     "kibana:stop": "docker compose stop",
-    "kibana:init": "node init_kibana.js"
+    "kibana:init": "node init_kibana.js",
+    "kibana:teardown": "docker compose down -v"
   },
   "dependencies": {
     "express": "^5.2.1"
