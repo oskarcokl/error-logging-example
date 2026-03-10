@@ -1,0 +1,12 @@
+- [x] create s setup script for the elastic dockers, configuraiton and index setup
+- [x] happy path should have backend endpoint that also logs
+- [x] create frontend error path
+- [x] create backend error path
+- [x] make requestId per request (generate inside each action, keep correlationId constant for the unit of work)
+- [x] add button that triggers two backend requests sharing one correlationId but different requestIds
+- [ ] await backend logging fetch calls and handle/log failures
+- [ ] fix init_kibana timestamp vs mapping mismatch (either add timestamp field to docs or use @timestamp in data view)
+- [ ] correct init_kibana data_view existence check to match actual Kibana API response shape
+- [ ] make indexExists console logging accurate (don’t claim index exists on failure)
+- [ ] document Node version requirement (or add explicit fetch polyfill) in README
+- [ ] improve README with a step-by-step “copy correlationId into Kibana and see both frontend + backend logs” walkthrough

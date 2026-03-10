@@ -5,6 +5,7 @@ const BACKEND_ENDPOINT = "http://localhost:3000/action"
 const actionButton = document.getElementById("action-button");
 const errorFrontendButton = document.getElementById("error-frontend-button");
 const errorBackendButton = document.getElementById("error-backend-button");
+const doubleRequestButton = document.getElementById("double-request-button");
 
 const errorMessage = document.getElementById("error-msg");
 
@@ -98,4 +99,47 @@ errorBackendButton.addEventListener("click", async () => {
     if (res.status === 500) {
         errorMessage.innerText = `Server error errorId: ${correlationId}`;
     }
+});
+
+
+doubleRequestButton.addEventListener("click", () => {
+    let requestId = self.crypto.randomUUID();
+    const correlationId = self.crypto.randomUUID();
+    // Log action to elastic search
+    fetch(ELASTIC_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({
+            action: "double request button click frontend",
+            status: "success",
+            requestId: requestId,
+            correlationId: correlationId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    // Perform backend call
+    fetch(BACKEND_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({
+            requestId: requestId,
+            correlationId: correlationId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    requestId = self.crypto.randomUUID();
+    fetch(BACKEND_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({
+            requestId: requestId,
+            correlationId: correlationId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
 });
