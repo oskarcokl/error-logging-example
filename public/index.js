@@ -8,10 +8,10 @@ const errorBackendButton = document.getElementById("error-backend-button");
 
 const errorMessage = document.getElementById("error-msg");
 
-const correlationId = self.crypto.randomUUID();
-const requestId = self.crypto.randomUUID();
 
 actionButton.addEventListener("click", () => {
+    const requestId = self.crypto.randomUUID();
+    const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
     fetch(ELASTIC_ENDPOINT, {
         method: "POST",
@@ -40,6 +40,8 @@ actionButton.addEventListener("click", () => {
 });
 
 errorFrontendButton.addEventListener("click", () => {
+    const requestId = self.crypto.randomUUID();
+    const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
     fetch(ELASTIC_ENDPOINT, {
         method: "POST",
@@ -64,6 +66,8 @@ errorFrontendButton.addEventListener("click", () => {
 });
 
 errorBackendButton.addEventListener("click", async () => {
+    const requestId = self.crypto.randomUUID();
+    const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
     fetch(ELASTIC_ENDPOINT, {
         method: "POST",
