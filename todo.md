@@ -5,7 +5,7 @@
 - [x] make requestId per request (generate inside each action, keep correlationId constant for the unit of work)
 - [x] add button that triggers two backend requests sharing one correlationId but different requestIds
 - [x] await backend logging fetch calls and handle/log failures
-- [ ] add .catch to frontend ES logging fetch calls so failures aren’t silent (e.g. console.error)
+- [x] add .catch to frontend ES logging fetch calls so failures aren’t silent (e.g. console.error)
 - [x] fix init_kibana timestamp vs mapping mismatch (either add timestamp field to docs or use @timestamp in data view)
 - [ ] correct init_kibana data_view existence check to match actual Kibana API response shape
 - [ ] make indexExists console logging accurate (don’t claim index exists on failure)

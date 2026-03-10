@@ -9,24 +9,28 @@ const doubleRequestButton = document.getElementById("double-request-button");
 
 const errorMessage = document.getElementById("error-msg");
 
+function logEs(payload, endpoint) {
+    fetch(endpoint, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).catch(error => console.error("Failed to log to ES", payload?.correlationId, payload?.requestId, error));
+}
+
 
 actionButton.addEventListener("click", () => {
     const requestId = self.crypto.randomUUID();
     const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
-    fetch(ELASTIC_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify({
-            action: "button click frontend",
-            status: "success",
-            requestId: requestId,
-            correlationId: correlationId,
-            timestamp: new Date().toISOString()
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+    logEs({
+        action: "button click frontend",
+        status: "success",
+        requestId: requestId,
+        correlationId: correlationId,
+        timestamp: new Date().toISOString()
+    }, ELASTIC_ENDPOINT);
 
     // Perform backend call
     fetch(BACKEND_ENDPOINT, {
@@ -45,24 +49,18 @@ errorFrontendButton.addEventListener("click", () => {
     const requestId = self.crypto.randomUUID();
     const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
-    fetch(ELASTIC_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify({
-            action: "button click frontend",
-            status: "error",
-            requestId: requestId,
-            correlationId: correlationId,
-            trace: {
-                errorMessage: "Error when user clicked button",
-                errorCode: "USER_BUTTON_CLICK_ERROR",
-                buttonClicked: errorFrontendButton.id,
-            },
-            timestamp: new Date().toISOString()
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+    logEs({
+        action: "button click frontend",
+        status: "error",
+        requestId: requestId,
+        correlationId: correlationId,
+        trace: {
+            errorMessage: "Error when user clicked button",
+            errorCode: "USER_BUTTON_CLICK_ERROR",
+            buttonClicked: errorFrontendButton.id,
+        },
+        timestamp: new Date().toISOString()
+    }, ELASTIC_ENDPOINT);
 
     // show correlationId to user so that he can search it
     errorMessage.innerText = `Error when clicking button errorId: ${correlationId}`;
@@ -72,19 +70,13 @@ errorBackendButton.addEventListener("click", async () => {
     const requestId = self.crypto.randomUUID();
     const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
-    fetch(ELASTIC_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify({
-            action: "button click frontend",
-            status: "success",
-            requestId: requestId,
-            correlationId: correlationId,
-            timestamp: new Date().toISOString()
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+    logEs({
+        action: "button click frontend",
+        status: "success",
+        requestId: requestId,
+        correlationId: correlationId,
+        timestamp: new Date().toISOString()
+    }, ELASTIC_ENDPOINT)
 
     // Perform backend call
     const res = await fetch(BACKEND_ENDPOINT, {
@@ -109,19 +101,13 @@ doubleRequestButton.addEventListener("click", () => {
     let requestId = self.crypto.randomUUID();
     const correlationId = self.crypto.randomUUID();
     // Log action to elastic search
-    fetch(ELASTIC_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify({
-            action: "double request button click frontend",
-            status: "success",
-            requestId: requestId,
-            correlationId: correlationId,
-            timestamp: new Date().toISOString()
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+    logEs({
+        action: "double request button click frontend",
+        status: "success",
+        requestId: requestId,
+        correlationId: correlationId,
+        timestamp: new Date().toISOString()
+    }, ELASTIC_ENDPOINT);
 
     // Perform backend call
     fetch(BACKEND_ENDPOINT, {
