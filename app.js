@@ -18,20 +18,21 @@ app.post('/action', async (req, res) => {
     if (!reqError) {
         // Happy path
         try {
-            const esRes = await fetch(ELASTIC_ENDPOINT, {
+            const resEs = await fetch(ELASTIC_ENDPOINT, {
                 method: "POST",
                 body: JSON.stringify({
                     action: "/action backend",
                     status: "success",
                     requestId: requestId,
-                    correlationId: correlationId
+                    correlationId: correlationId,
+                    timestamp: new Date().toISOString()
                 }),
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
 
-            if (!esRes.ok) throw new Error('ES logging failed');
+            if (!resEs.ok) throw new Error('ES logging failed');
 
             res.send('Success');
         } catch (error) {
@@ -52,7 +53,8 @@ app.post('/action', async (req, res) => {
                         errorMessage: "Error when processing data",
                         errorCode: "DATA_PROCESSING_ERROR",
                         functionName: "/action handler",
-                    }
+                    },
+                    timestamp: new Date().toISOString()
                 }),
                 headers: {
                     "Content-Type": "application/json"

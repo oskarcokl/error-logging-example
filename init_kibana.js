@@ -75,6 +75,7 @@ async function createIndex() {
           action: { type: 'keyword' },
           status: { type: 'keyword' },
           trace: { type: 'object' },
+          timestamp: { type: 'date' }
         },
       },
     }),

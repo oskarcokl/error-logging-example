@@ -20,7 +20,8 @@ actionButton.addEventListener("click", () => {
             action: "button click frontend",
             status: "success",
             requestId: requestId,
-            correlationId: correlationId
+            correlationId: correlationId,
+            timestamp: new Date().toISOString()
         }),
         headers: {
             "Content-Type": "application/json"
@@ -55,7 +56,8 @@ errorFrontendButton.addEventListener("click", () => {
                 errorMessage: "Error when user clicked button",
                 errorCode: "USER_BUTTON_CLICK_ERROR",
                 buttonClicked: errorFrontendButton.id,
-            }
+            },
+            timestamp: new Date().toISOString()
         }),
         headers: {
             "Content-Type": "application/json"
@@ -76,7 +78,8 @@ errorBackendButton.addEventListener("click", async () => {
             action: "button click frontend",
             status: "success",
             requestId: requestId,
-            correlationId: correlationId
+            correlationId: correlationId,
+            timestamp: new Date().toISOString()
         }),
         headers: {
             "Content-Type": "application/json"
@@ -112,7 +115,8 @@ doubleRequestButton.addEventListener("click", () => {
             action: "double request button click frontend",
             status: "success",
             requestId: requestId,
-            correlationId: correlationId
+            correlationId: correlationId,
+            timestamp: new Date().toISOString()
         }),
         headers: {
             "Content-Type": "application/json"
