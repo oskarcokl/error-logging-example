@@ -9,5 +9,5 @@
 - [x] fix init_kibana timestamp vs mapping mismatch (either add timestamp field to docs or use @timestamp in data view)
 - [ ] correct init_kibana data_view existence check to match actual Kibana API response shape
 - [ ] make indexExists console logging accurate (don’t claim index exists on failure)
-- [ ] document Node version requirement (or add explicit fetch polyfill) in README
-- [ ] improve README with a step-by-step “copy correlationId into Kibana and see both frontend + backend logs” walkthrough
+- [x] document Node version requirement (or add explicit fetch polyfill) in README
+- [x] improve README with a step-by-step “copy correlationId into Kibana and see both frontend + backend logs” walkthrough
